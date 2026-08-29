@@ -1,0 +1,926 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<title>Portfolio — Multimedia Systems (CTMLSYSL)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bagel+Fat+One&family=Pixelify+Sans:wght@400..700&family=Nunito:ital,wght@0,400;0,600;0,700;0,800;1,400&display=swap" rel="stylesheet">
+<style>
+/* ============================================================
+   TOKENS
+   ============================================================ */
+:root{
+  --ink:#26402F;
+  --ink-soft:#4C6B54;
+  --ink-mute:#71906F;
+
+  --mint-050:#F2F8ED;
+  --mint-100:#DFEFD5;
+  --mint-200:#CBE4BF;
+  --mint-300:#AFD3A2;
+  --mint-500:#8CBE84;
+  --mint-700:#5C8F5E;
+
+  --rose-100:#FDE6EC;
+  --rose-200:#FBD2DE;
+  --rose-300:#F5B6C9;
+  --rose-500:#EB90AB;
+  --rose-700:#C9647F;
+
+  --cream:#FFFAF3;
+
+  --glass: rgba(255,255,255,.42);
+  --glass-strong: rgba(255,255,255,.66);
+  --edge: rgba(255,255,255,.75);
+  --shadow-soft: 0 18px 40px -22px rgba(38,64,47,.55);
+  --shadow-lift: 0 26px 60px -26px rgba(38,64,47,.62);
+
+  --r-sm:14px; --r-md:22px; --r-lg:34px; --r-xl:46px; --r-pill:999px;
+
+  --display:"Bagel Fat One", "Trebuchet MS", cursive;
+  --pixel:"Pixelify Sans", "Courier New", monospace;
+  --body:"Nunito", "Segoe UI", system-ui, sans-serif;
+
+  --col: 940px;
+}
+
+*{box-sizing:border-box}
+html{scroll-behavior:smooth; scroll-padding-top:96px}
+body{
+  margin:0;
+  font-family:var(--body);
+  color:var(--ink);
+  background:#C6DEBC;
+  -webkit-font-smoothing:antialiased;
+  overflow-x:hidden;
+}
+
+/* dreamy blurred backdrop, like the reference's soft photo wash */
+.backdrop{position:fixed; inset:-10vmax; z-index:-2; filter:blur(0px);}
+.backdrop::before{
+  content:""; position:absolute; inset:0;
+  background:
+    radial-gradient(46vmax 40vmax at 12% 4%, #F7C9D8 0%, rgba(247,201,216,0) 62%),
+    radial-gradient(48vmax 44vmax at 92% 16%, #DCF0CE 0%, rgba(220,240,206,0) 60%),
+    radial-gradient(60vmax 52vmax at 70% 78%, #F3B9CD 0%, rgba(243,185,205,0) 58%),
+    radial-gradient(52vmax 48vmax at 8% 92%, #9EC79A 0%, rgba(158,199,154,0) 60%),
+    linear-gradient(170deg,#CFE6C4 0%, #B9D7B1 45%, #C9DDBE 100%);
+}
+.backdrop::after{ /* fine grain so the pastels don't look flat */
+  content:""; position:absolute; inset:0; opacity:.16; mix-blend-mode:soft-light;
+  background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='120' height='120'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3'/></filter><rect width='120' height='120' filter='url(%23n)'/></svg>");
+}
+
+/* ============================================================
+   LAYOUT SHELL
+   ============================================================ */
+.wrap{max-width:var(--col); margin:0 auto; padding:0 18px 90px}
+
+.panel{
+  position:relative;
+  background:
+    linear-gradient(158deg, rgba(255,255,255,.58), rgba(255,255,255,.22) 42%, rgba(175,211,162,.34)),
+    rgba(207,231,196,.5);
+  border:1px solid var(--edge);
+  border-radius:var(--r-xl);
+  box-shadow:var(--shadow-soft), inset 0 1px 0 rgba(255,255,255,.9);
+  backdrop-filter:blur(14px) saturate(1.15);
+  -webkit-backdrop-filter:blur(14px) saturate(1.15);
+  padding:34px 30px;
+}
+.panel.rose{
+  background:
+    linear-gradient(158deg, rgba(255,255,255,.6), rgba(253,230,236,.4) 45%, rgba(245,182,201,.36)),
+    rgba(253,236,241,.5);
+}
+section{scroll-margin-top:104px}
+
+/* ============================================================
+   NAV
+   ============================================================ */
+.nav-shell{position:sticky; top:0; z-index:60; padding:14px 18px 10px; display:flex; justify-content:center}
+.nav{
+  display:flex; gap:6px; align-items:center; flex-wrap:wrap; justify-content:center;
+  background:rgba(255,255,255,.5);
+  border:1px solid var(--edge);
+  border-radius:var(--r-pill);
+  padding:6px;
+  box-shadow:var(--shadow-soft);
+  backdrop-filter:blur(16px) saturate(1.2);
+  -webkit-backdrop-filter:blur(16px) saturate(1.2);
+}
+.nav a{
+  font:600 13.5px/1 var(--body);
+  letter-spacing:.02em;
+  color:var(--ink-soft);
+  text-decoration:none;
+  padding:10px 16px;
+  border-radius:var(--r-pill);
+  transition:background .25s, color .25s, transform .18s;
+}
+.nav a:hover{background:rgba(255,255,255,.7); color:var(--ink); transform:translateY(-1px)}
+.nav a.on{background:var(--mint-500); color:#fff; box-shadow:0 6px 14px -6px rgba(92,143,94,.9)}
+
+/* ============================================================
+   HERO
+   ============================================================ */
+.hero{padding-top:6px}
+.hero-frame{
+  position:relative;
+  padding:30px 26px 34px;
+  border-radius:var(--r-xl);
+  overflow:hidden;
+}
+/* pink accent circle behind the green blob */
+.hero-frame::before{
+  content:""; position:absolute; width:340px; height:340px; right:-90px; top:-120px;
+  background:radial-gradient(circle at 40% 40%, var(--rose-300), var(--rose-200) 60%, rgba(251,210,222,0) 72%);
+  border-radius:50%; z-index:0; opacity:.85;
+}
+.hero-frame::after{
+  content:""; position:absolute; width:260px; height:260px; left:-110px; bottom:-130px;
+  background:radial-gradient(circle at 50% 50%, var(--mint-300), rgba(175,211,162,0) 70%);
+  border-radius:50%; z-index:0;
+}
+.hero-inner{position:relative; z-index:1}
+
+.hero-top{display:flex; gap:22px; align-items:center; flex-wrap:wrap}
+
+/* profile photo placeholder with glow ring */
+.avatar-slot{position:relative; flex:0 0 auto}
+.avatar-ring{
+  width:150px; height:150px; border-radius:50%;
+  padding:7px;
+  background:conic-gradient(from 210deg, var(--rose-300), var(--mint-300), var(--cream), var(--rose-300));
+  box-shadow:0 0 0 8px rgba(255,255,255,.35), 0 0 44px 6px rgba(245,182,201,.7);
+  animation:spinRing 18s linear infinite;
+}
+@keyframes spinRing{to{transform:rotate(360deg)}}
+.avatar-hole{
+  width:100%; height:100%; border-radius:50%;
+  background:linear-gradient(160deg,var(--cream),var(--mint-100));
+  display:grid; place-items:center; overflow:hidden;
+  animation:spinRing 18s linear infinite reverse;
+}
+.avatar-hole img{width:100%;height:100%;object-fit:cover;display:none}
+.avatar-hole.filled img{display:block}
+.avatar-hole.filled .ph{display:none}
+.ph{font:700 11px/1.4 var(--pixel); color:var(--ink-mute); text-align:center; letter-spacing:.04em; padding:0 14px}
+.avatar-btn{
+  position:absolute; right:-2px; bottom:4px; z-index:3;
+  font:700 10.5px/1 var(--pixel); letter-spacing:.05em;
+  background:var(--cream); color:var(--ink); border:1px solid var(--edge);
+  border-radius:var(--r-pill); padding:8px 11px; cursor:pointer;
+  box-shadow:var(--shadow-soft);
+}
+.avatar-btn:hover{background:#fff}
+
+.hero-hello{flex:1 1 240px; min-width:200px}
+.loading{margin-bottom:12px; width:180px}
+.loading-track{
+  height:15px; border:2px solid var(--ink); border-radius:3px; background:rgba(255,255,255,.55);
+  padding:2px; display:flex; gap:2px;
+}
+.loading-track i{flex:1; background:var(--ink); border-radius:1px; animation:blockIn .5s both}
+.loading-track i:nth-child(1){animation-delay:.05s}.loading-track i:nth-child(2){animation-delay:.12s}
+.loading-track i:nth-child(3){animation-delay:.19s}.loading-track i:nth-child(4){animation-delay:.26s}
+.loading-track i:nth-child(5){animation-delay:.33s}.loading-track i:nth-child(6){animation-delay:.4s}
+.loading-track i:nth-child(7){animation-delay:.47s}.loading-track i:nth-child(8){animation-delay:.54s}
+.loading-track i:nth-child(9){animation-delay:.61s}.loading-track i:nth-child(10){animation-delay:.68s}
+@keyframes blockIn{from{opacity:0; transform:scaleY(.2)}to{opacity:1;transform:none}}
+.loading-label{font:700 12px/1 var(--pixel); letter-spacing:.22em; margin-top:6px; color:var(--ink)}
+
+.hello-note{
+  font:400 14px/1.55 var(--body); color:var(--ink-soft);
+}
+.hello-note b{font-family:var(--pixel); font-weight:700; letter-spacing:.02em}
+
+/* the big Port / folio lockup */
+.lockup{position:relative; margin:26px 0 6px; text-align:center}
+.lockup h1{margin:0; line-height:.82; letter-spacing:-.01em}
+.word-port{
+  display:inline-block; font-family:var(--display); font-size:clamp(58px,13.5vw,124px);
+  color:var(--rose-500);
+  text-shadow:3px 4px 0 rgba(255,255,255,.85), 0 16px 26px rgba(203,100,127,.28);
+  transform:translateY(6px) rotate(-2deg);
+}
+.word-folio{
+  display:inline-block; font-family:var(--pixel); font-weight:700;
+  font-size:clamp(50px,12vw,112px); color:var(--mint-700);
+  margin-left:-.10em;
+  text-shadow:3px 4px 0 rgba(255,255,255,.9);
+}
+.lockup .tagline{
+  display:inline-flex; align-items:center; gap:8px;
+  font:700 13px/1 var(--pixel); letter-spacing:.06em; color:var(--ink);
+  background:rgba(255,255,255,.55); border:1px solid var(--edge);
+  border-radius:var(--r-pill); padding:8px 14px; margin-top:14px;
+}
+
+.hero-sub{
+  display:flex; gap:14px; align-items:center; justify-content:center; flex-wrap:wrap;
+  margin-top:18px;
+}
+.sub-pill{
+  font:700 12.5px/1 var(--pixel); letter-spacing:.05em; color:var(--ink);
+  background:var(--mint-200); border:1px solid rgba(255,255,255,.8);
+  border-radius:var(--r-pill); padding:11px 18px; box-shadow:var(--shadow-soft);
+}
+
+/* cassette widget (decorative) */
+.cassette{
+  width:186px; background:linear-gradient(160deg,var(--cream),var(--rose-100));
+  border:1px solid var(--edge); border-radius:16px; padding:10px 12px;
+  box-shadow:var(--shadow-soft);
+}
+.cassette-top{display:flex; align-items:center; gap:10px}
+.reel{width:26px;height:26px;border-radius:50%;background:var(--mint-200);border:3px solid var(--mint-500);
+  display:grid;place-items:center; animation:spinRing 4s linear infinite}
+.reel::after{content:"";width:7px;height:7px;background:var(--mint-700);border-radius:50%}
+.tape{flex:1;height:6px;border-radius:3px;background:repeating-linear-gradient(90deg,var(--rose-300) 0 6px,transparent 6px 10px)}
+.cassette-label{font:700 9.5px/1 var(--pixel); letter-spacing:.14em; color:var(--ink-mute); margin-top:9px; display:flex; justify-content:space-between}
+
+/* bio card */
+.bio{
+  margin-top:24px; background:rgba(255,255,255,.62); border:1px solid var(--edge);
+  border-radius:var(--r-lg); padding:22px 24px; box-shadow:inset 0 1px 0 rgba(255,255,255,.9);
+}
+.bio h2{margin:0 0 4px; font:400 22px/1.2 var(--display); color:var(--ink)}
+.bio .meta{font:700 11.5px/1 var(--pixel); letter-spacing:.1em; color:var(--mint-700); margin-bottom:12px}
+.bio p{margin:0; font-size:15px; line-height:1.68; color:var(--ink-soft)}
+
+/* ============================================================
+   SHARED HEADINGS
+   ============================================================ */
+.eyebrow{
+  display:inline-block; font:700 11px/1 var(--pixel); letter-spacing:.2em;
+  color:var(--rose-700); background:var(--rose-100); border:1px solid rgba(255,255,255,.8);
+  padding:8px 13px; border-radius:var(--r-pill); margin-bottom:12px;
+}
+h2.head{margin:0 0 14px; font:400 clamp(26px,4.6vw,38px)/1.05 var(--display); color:var(--ink)}
+h2.head span{color:var(--rose-500)}
+.lede{font-size:15px; line-height:1.7; color:var(--ink-soft); margin:0}
+
+.stack{display:flex; flex-direction:column; gap:26px; margin-top:26px}
+
+/* info pill + timeline */
+.info-pill{
+  background:rgba(255,255,255,.6); border:1px solid var(--edge);
+  border-radius:var(--r-pill); padding:20px 26px; font-size:14.5px; line-height:1.65; color:var(--ink-soft);
+}
+@media (max-width:640px){ .info-pill{border-radius:var(--r-lg)} }
+
+.timeline{margin-top:24px; overflow-x:auto; padding-bottom:8px}
+.timeline-track{display:flex; align-items:flex-start; gap:0; min-width:640px; position:relative; padding-top:6px}
+.tl-step{flex:1; text-align:center; position:relative}
+.tl-step::before{
+  content:""; position:absolute; top:13px; left:-50%; width:100%;
+  border-top:2px dashed var(--mint-500); opacity:.6;
+}
+.tl-step:first-child::before{display:none}
+.tl-dot{
+  width:28px;height:28px;border-radius:50%; margin:0 auto 8px; position:relative; z-index:1;
+  display:grid;place-items:center; font:700 12px/1 var(--pixel); color:#fff;
+  background:var(--mint-500); border:3px solid var(--cream); box-shadow:0 6px 14px -8px rgba(38,64,47,.9);
+}
+.tl-step:nth-child(even) .tl-dot{background:var(--rose-500)}
+.tl-cap{font-size:11.5px; line-height:1.35; color:var(--ink-soft); padding:0 6px}
+
+/* ============================================================
+   GALLERY / DECK
+   ============================================================ */
+.deck-wrap{position:relative; margin-top:8px}
+.deck{
+  position:relative; height:470px; touch-action:pan-y;
+  cursor:grab; user-select:none;
+  display:grid; place-items:center;
+}
+.deck.dragging{cursor:grabbing}
+.card{
+  position:absolute; width:246px; height:352px;
+  border-radius:26px; padding:10px;
+  background:var(--cream);
+  border:5px solid var(--mint-300);
+  box-shadow:var(--shadow-lift);
+  transition:transform .55s cubic-bezier(.34,1.4,.64,1), opacity .45s ease, box-shadow .3s;
+  will-change:transform;
+  display:flex; flex-direction:column; gap:10px;
+  overflow:hidden;
+}
+.card.alt{border-color:var(--rose-300)}
+.card .thumb{
+  flex:1; border-radius:18px; overflow:hidden; position:relative;
+  background:
+    repeating-linear-gradient(45deg, rgba(175,211,162,.32) 0 10px, rgba(255,255,255,.4) 10px 20px);
+  display:grid; place-items:center; text-align:center;
+}
+.card.alt .thumb{background:repeating-linear-gradient(45deg, rgba(245,182,201,.32) 0 10px, rgba(255,255,255,.4) 10px 20px)}
+.card .thumb img{position:absolute; inset:0; width:100%; height:100%; object-fit:cover}
+.card .num{
+  position:absolute; top:8px; left:8px; z-index:2;
+  font:700 11px/1 var(--pixel); letter-spacing:.06em; color:#fff;
+  background:var(--mint-700); padding:6px 9px; border-radius:var(--r-pill);
+}
+.card.alt .num{background:var(--rose-700)}
+.card .cap{padding:0 6px 4px}
+.card .cap h3{margin:0 0 8px; font:700 14.5px/1.25 var(--body); color:var(--ink)}
+.card .view{
+  display:inline-flex; align-items:center; gap:6px;
+  font:700 10.5px/1 var(--pixel); letter-spacing:.08em; color:var(--ink);
+  background:var(--mint-200); border-radius:var(--r-pill); padding:7px 11px;
+}
+.card.alt .view{background:var(--rose-200)}
+.card.center{cursor:pointer}
+.card.center:hover{transform:var(--tf) scale(1.045) !important; box-shadow:0 34px 70px -28px rgba(38,64,47,.7)}
+
+.deck-nav{display:flex; align-items:center; justify-content:center; gap:14px; margin-top:6px}
+.arrow{
+  width:46px;height:46px;border-radius:50%; border:1px solid var(--edge); cursor:pointer;
+  background:rgba(255,255,255,.66); color:var(--ink-soft); font-size:19px; line-height:1;
+  display:grid;place-items:center; box-shadow:var(--shadow-soft);
+  transition:transform .18s, background .2s;
+}
+.arrow:hover{background:#fff; transform:translateY(-2px)}
+.arrow:active{transform:scale(.92)}
+.dots{display:flex; gap:7px; align-items:center}
+.dots button{
+  width:9px;height:9px;border-radius:50%;border:0;padding:0;cursor:pointer;
+  background:rgba(255,255,255,.75); transition:width .3s, background .3s;
+}
+.dots button.on{width:26px; border-radius:var(--r-pill); background:var(--mint-700)}
+.deck-hint{text-align:center; font:700 10.5px/1 var(--pixel); letter-spacing:.16em; color:var(--ink-mute); margin-top:12px}
+
+/* ============================================================
+   MODAL
+   ============================================================ */
+.modal{
+  position:fixed; inset:0; z-index:100; display:none; place-items:center;
+  padding:20px; background:rgba(46,72,54,.42); backdrop-filter:blur(8px);
+  -webkit-backdrop-filter:blur(8px);
+  opacity:0; transition:opacity .28s ease;
+}
+.modal.show{display:grid; opacity:1}
+.sheet{
+  width:min(920px,100%); max-height:88vh; overflow:auto;
+  background:linear-gradient(165deg,var(--cream),var(--mint-050));
+  border:1px solid var(--edge); border-radius:var(--r-lg);
+  box-shadow:0 40px 90px -30px rgba(20,40,26,.7);
+  padding:22px; position:relative;
+  transform:scale(.93) translateY(14px); opacity:0;
+  transition:transform .38s cubic-bezier(.34,1.4,.64,1), opacity .3s ease;
+}
+.modal.show .sheet{transform:none; opacity:1}
+.sheet-grid{display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1fr); gap:22px}
+@media (max-width:760px){ .sheet-grid{grid-template-columns:1fr} }
+
+.shot{
+  border-radius:var(--r-md); min-height:300px; position:relative; overflow:hidden;
+  border:4px solid var(--mint-300);
+  background:repeating-linear-gradient(45deg, rgba(175,211,162,.3) 0 12px, rgba(255,255,255,.45) 12px 24px);
+  display:grid; place-items:center; text-align:center; padding:20px;
+}
+.shot.alt{border-color:var(--rose-300); background:repeating-linear-gradient(45deg, rgba(245,182,201,.3) 0 12px, rgba(255,255,255,.45) 12px 24px)}
+.shot img{position:absolute; inset:0; width:100%; height:100%; object-fit:contain; background:var(--cream)}
+.upload-btn{
+  font:700 11px/1 var(--pixel); letter-spacing:.06em; color:var(--ink);
+  background:var(--cream); border:1px solid var(--edge); border-radius:var(--r-pill);
+  padding:10px 14px; cursor:pointer; box-shadow:var(--shadow-soft); position:relative; z-index:2;
+}
+.upload-btn:hover{background:#fff}
+.shot .stackcol{display:flex;flex-direction:column;gap:10px;align-items:center;position:relative;z-index:2}
+
+.sheet h3{margin:6px 0 4px; font:400 clamp(22px,3.4vw,30px)/1.1 var(--display); color:var(--ink)}
+.sheet .kicker{font:700 11px/1 var(--pixel); letter-spacing:.16em; color:var(--mint-700)}
+.field-label{font:700 10.5px/1 var(--pixel); letter-spacing:.14em; color:var(--ink-mute); margin:16px 0 7px; display:block}
+.editable{
+  border:2px dashed var(--mint-300); border-radius:var(--r-md); padding:14px 16px;
+  font-size:14.5px; line-height:1.65; color:var(--ink-soft); background:rgba(255,255,255,.6);
+  min-height:96px; outline:none;
+}
+.editable:focus{border-color:var(--rose-300); background:#fff}
+.editable.empty{color:var(--ink-mute); font-style:italic}
+.chips{display:flex; flex-wrap:wrap; gap:7px}
+.chip{
+  font:700 11px/1 var(--body); letter-spacing:.02em; color:var(--ink);
+  background:var(--mint-200); border:1px solid rgba(255,255,255,.8);
+  border-radius:var(--r-pill); padding:8px 12px;
+}
+.chip:nth-child(even){background:var(--rose-200)}
+
+.sheet-bar{display:flex; align-items:center; justify-content:space-between; gap:12px; margin-top:20px}
+.sheet-bar .pos{font:700 11px/1 var(--pixel); letter-spacing:.12em; color:var(--ink-mute)}
+.close{
+  position:absolute; top:14px; right:14px; z-index:5;
+  width:38px;height:38px;border-radius:50%; border:1px solid var(--edge); cursor:pointer;
+  background:rgba(255,255,255,.85); font-size:17px; color:var(--ink-soft); display:grid; place-items:center;
+}
+.close:hover{background:#fff}
+
+/* ============================================================
+   TOOLS
+   ============================================================ */
+.tools-row{display:flex; flex-wrap:wrap; gap:12px; margin-top:20px}
+.tool{
+  display:flex; align-items:center; gap:10px;
+  background:rgba(255,255,255,.62); border:1px solid var(--edge);
+  border-radius:var(--r-pill); padding:9px 16px 9px 9px; box-shadow:var(--shadow-soft);
+  transition:transform .2s;
+}
+.tool:hover{transform:translateY(-3px)}
+.tool i{
+  width:34px;height:34px;border-radius:12px; display:grid;place-items:center;
+  font:700 12px/1 var(--pixel); color:#fff; font-style:normal;
+}
+.tool span{font:700 13px/1 var(--body); color:var(--ink)}
+.tool small{display:block; font:400 11px/1.3 var(--body); color:var(--ink-mute); margin-top:3px}
+
+/* ============================================================
+   CLOSING
+   ============================================================ */
+.thanks{text-align:center; padding:38px 26px}
+.thanks h2{font-size:clamp(30px,6.4vw,52px); margin-bottom:6px}
+.thanks p{max-width:520px; margin:12px auto 0; font-size:15px; line-height:1.7; color:var(--ink-soft)}
+.sign{display:inline-block; margin-top:18px; font:700 12px/1 var(--pixel); letter-spacing:.1em;
+  background:var(--mint-500); color:#fff; border-radius:var(--r-pill); padding:12px 20px;
+  box-shadow:0 12px 26px -14px rgba(92,143,94,1)}
+footer{
+  margin-top:22px; text-align:center;
+  font:700 11px/1.9 var(--pixel); letter-spacing:.1em; color:var(--ink-mute);
+}
+
+/* ============================================================
+   STICKERS
+   ============================================================ */
+.sticker{position:absolute; pointer-events:none; z-index:4; filter:drop-shadow(0 8px 14px rgba(38,64,47,.28))}
+.float{animation:float 5.5s ease-in-out infinite}
+.float.slow{animation-duration:8s}
+.float.rev{animation-direction:reverse}
+@keyframes float{0%,100%{transform:translateY(0) rotate(-3deg)}50%{transform:translateY(-13px) rotate(3deg)}}
+.twinkle{animation:twinkle 3.2s ease-in-out infinite}
+@keyframes twinkle{0%,100%{opacity:.4; transform:scale(.85)}50%{opacity:1; transform:scale(1.08)}}
+
+/* ============================================================
+   A11Y + MOTION
+   ============================================================ */
+:focus-visible{outline:3px solid var(--rose-500); outline-offset:3px; border-radius:6px}
+@media (prefers-reduced-motion: reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{animation-duration:.001ms !important; animation-iteration-count:1 !important; transition-duration:.05ms !important}
+}
+@media (max-width:640px){
+  .panel{padding:26px 18px; border-radius:var(--r-lg)}
+  .avatar-ring{width:120px;height:120px}
+  .deck{height:420px}
+  .card{width:214px; height:306px}
+  .nav a{padding:9px 12px; font-size:12.5px}
+  .hero-sub{gap:10px}
+}
+</style>
+</head>
+<body>
+<div class="backdrop" aria-hidden="true"></div>
+
+<!-- ============ NAV ============ -->
+<div class="nav-shell">
+  <nav class="nav" aria-label="Section navigation">
+    <a href="#home" class="on">Home</a>
+    <a href="#portfolio">Portfolio</a>
+    <a href="#about">About</a>
+    <a href="#outputs">Outputs</a>
+    <a href="#contact">Contact</a>
+  </nav>
+</div>
+
+<div class="wrap">
+
+<!-- ============ HERO ============ -->
+<section id="home" class="hero">
+  <div class="panel hero-frame">
+    <!-- stickers -->
+    <svg class="sticker float" style="right:16px; top:118px; width:62px" viewBox="0 0 12 13" shape-rendering="crispEdges" aria-hidden="true">
+      <g fill="#FFFDF8">
+        <rect x="4" y="1" width="5" height="1"/><rect x="3" y="2" width="7" height="1"/>
+        <rect x="2" y="3" width="9" height="1"/><rect x="2" y="4" width="9" height="1"/>
+        <rect x="2" y="5" width="9" height="1"/><rect x="2" y="6" width="9" height="1"/>
+        <rect x="2" y="7" width="9" height="1"/><rect x="2" y="8" width="9" height="1"/>
+        <rect x="2" y="9" width="9" height="1"/>
+        <rect x="2" y="10" width="2" height="1"/><rect x="5" y="10" width="3" height="1"/><rect x="9" y="10" width="2" height="1"/>
+      </g>
+      <g fill="#26402F"><rect x="4" y="4" width="1" height="2"/><rect x="8" y="4" width="1" height="2"/></g>
+      <rect x="5" y="6" width="3" height="1" fill="#EB90AB"/>
+      <g fill="#5C8F5E"><rect x="5" y="0" width="3" height="1"/><rect x="4" y="-1" width="5" height="0"/></g>
+    </svg>
+    <svg class="sticker twinkle" style="left:22px; top:52px; width:30px" viewBox="0 0 24 24" aria-hidden="true">
+      <path d="M12 0l2.6 8.2L23 12l-8.4 3.8L12 24l-2.6-8.2L1 12l8.4-3.8z" fill="#FBD2DE"/>
+    </svg>
+    <svg class="sticker twinkle" style="right:120px; top:30px; width:20px; animation-delay:1.1s" viewBox="0 0 24 24" aria-hidden="true">
+      <path d="M12 0l2.6 8.2L23 12l-8.4 3.8L12 24l-2.6-8.2L1 12l8.4-3.8z" fill="#FFFDF8"/>
+    </svg>
+
+    <div class="hero-inner">
+      <div class="hero-top">
+        <div class="avatar-slot">
+          <div class="avatar-ring">
+            <div class="avatar-hole" id="avatarHole">
+              <span class="ph">[UPLOAD<br>PHOTO]</span>
+              <img id="avatarImg" alt="Profile photo">
+            </div>
+          </div>
+          <button class="avatar-btn" id="avatarBtn">+ photo</button>
+          <input type="file" accept="image/*" id="avatarInput" hidden>
+        </div>
+
+        <div class="hero-hello">
+          <div class="loading">
+            <div class="loading-track" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+            <div class="loading-label">LOADING 100%</div>
+          </div>
+          <p class="hello-note">Hi, hello, welcome to my little corner of the semester. <b>Everything I made for Multimedia Systems lives here</b> — pubmats, vectors, logos, and one very stubborn photo manipulation.</p>
+        </div>
+      </div>
+
+      <div class="lockup">
+        <h1><span class="word-port">Port</span><span class="word-folio">folio</span></h1>
+        <div class="tagline">MIDTERM COMPILATION <span aria-hidden="true">←</span></div>
+      </div>
+
+      <div class="hero-sub">
+        <div class="sub-pill">Multimedia Systems (CTMLSYSL) — A.Y. 2026–2027</div>
+        <div class="cassette" aria-hidden="true">
+          <div class="cassette-top">
+            <div class="reel"></div>
+            <div class="tape"></div>
+            <div class="reel"></div>
+          </div>
+          <div class="cassette-label"><span>SIDE A</span><span>MIDTERMS</span></div>
+        </div>
+      </div>
+
+      <div class="bio">
+        <h2 contenteditable="true" spellcheck="false">[Your Name]</h2>
+        <div class="meta" contenteditable="true" spellcheck="false">BSIT — [SECTION] · [SCHEDULE]</div>
+        <p>So glad you're here. This page is my midterm output compilation for Multimedia Systems, put together like a zine instead of a folder — because staring at a grid of files felt wrong for a design class. Swipe through the deck below and you'll find every activity I worked on, in the order I made them, with a bit of honesty about how each one went. Some were fun, some fought back. Both taught me something.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="stack">
+
+<!-- ============ ABOUT ============ -->
+<section id="about" class="panel rose" style="position:relative">
+  <svg class="sticker float slow" style="right:24px; top:-18px; width:34px" viewBox="0 0 24 24" aria-hidden="true">
+    <path d="M12 0l2.6 8.2L23 12l-8.4 3.8L12 24l-2.6-8.2L1 12l8.4-3.8z" fill="#AFD3A2"/>
+  </svg>
+  <span class="eyebrow">ABOUT / THE DESIGN JOURNEY</span>
+  <h2 class="head">How this <span>portfolio</span> came together</h2>
+  <div class="info-pill">
+    This portfolio compiles every midterm activity from the course — starting with the welcome pubmat and ending with the final GIMP poster. Laid out in order, it reads like a progress bar: shapes first, then shading, then brand thinking, then full composites. What I'm proudest of isn't any single output, it's that the later files took me half the time and twice the confidence of the first ones.
+  </div>
+
+  <div class="timeline" role="list" aria-label="Activity order">
+    <div class="timeline-track">
+      <div class="tl-step" role="listitem"><div class="tl-dot">1</div><div class="tl-cap">Welcome Pubmat</div></div>
+      <div class="tl-step" role="listitem"><div class="tl-dot">2</div><div class="tl-cap">Character Tracing</div></div>
+      <div class="tl-step" role="listitem"><div class="tl-dot">3</div><div class="tl-cap">Egg Tracing</div></div>
+      <div class="tl-step" role="listitem"><div class="tl-dot">4</div><div class="tl-cap">Vector Portrait</div></div>
+      <div class="tl-step" role="listitem"><div class="tl-dot">5</div><div class="tl-cap">MySQL Redesign</div></div>
+      <div class="tl-step" role="listitem"><div class="tl-dot">6</div><div class="tl-cap">My Own Logo</div></div>
+      <div class="tl-step" role="listitem"><div class="tl-dot">7</div><div class="tl-cap">GIMP Poster</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ GALLERY ============ -->
+<section id="portfolio" class="panel" style="position:relative">
+  <svg class="sticker float rev" style="left:14px; bottom:26px; width:44px" viewBox="0 0 12 13" shape-rendering="crispEdges" aria-hidden="true">
+    <g fill="#FDE6EC">
+      <rect x="4" y="1" width="5" height="1"/><rect x="3" y="2" width="7" height="1"/>
+      <rect x="2" y="3" width="9" height="7"/>
+      <rect x="2" y="10" width="2" height="1"/><rect x="5" y="10" width="3" height="1"/><rect x="9" y="10" width="2" height="1"/>
+    </g>
+    <g fill="#26402F"><rect x="4" y="4" width="1" height="2"/><rect x="8" y="4" width="1" height="2"/></g>
+  </svg>
+  <span class="eyebrow">SPILL THE OUTPUTS</span>
+  <h2 class="head">Drag the deck, <span>open a card</span></h2>
+  <p class="lede">Seven outputs, in the order they were made. Tap the card in front to read the full write-up.</p>
+
+  <div class="deck-wrap">
+    <div class="deck" id="deck"></div>
+    <div class="deck-nav">
+      <button class="arrow" id="prev" aria-label="Previous output">‹</button>
+      <div class="dots" id="dots"></div>
+      <button class="arrow" id="next" aria-label="Next output">›</button>
+    </div>
+    <div class="deck-hint">DRAG · SWIPE · OR USE ARROW KEYS</div>
+  </div>
+</section>
+
+<!-- ============ OUTPUTS LIST / TOOLS ============ -->
+<section id="outputs" class="panel rose">
+  <span class="eyebrow">TOOLS OF THE SEMESTER</span>
+  <h2 class="head">What I <span>built it with</span></h2>
+  <p class="lede">Every output above came out of one of these. The switching between them was half the lesson.</p>
+  <div class="tools-row">
+    <div class="tool"><i style="background:#5C8F5E">GI</i><span>GIMP<small>Photo manipulation, poster compositing</small></span></div>
+    <div class="tool"><i style="background:#EB90AB">Ai</i><span>Illustrator<small>Vector tracing, logo builds</small></span></div>
+    <div class="tool"><i style="background:#8CBE84">Ps</i><span>Photoshop<small>Retouching, color grading</small></span></div>
+    <div class="tool"><i style="background:#C9647F">Ca</i><span>Canva<small>Pubmat layout, quick type</small></span></div>
+    <div class="tool"><i style="background:#4C6B54">My</i><span>MySQL<small>Brand study for the redesign</small></span></div>
+    <div class="tool"><i style="background:#F5B6C9;color:#26402F">Cc</i><span>CapCut<small>Motion + short-form edits</small></span></div>
+  </div>
+</section>
+
+<!-- ============ CLOSING ============ -->
+<section id="contact" class="panel thanks" style="position:relative">
+  <svg class="sticker twinkle" style="left:30px; top:24px; width:26px" viewBox="0 0 24 24" aria-hidden="true">
+    <path d="M12 0l2.6 8.2L23 12l-8.4 3.8L12 24l-2.6-8.2L1 12l8.4-3.8z" fill="#F5B6C9"/>
+  </svg>
+  <svg class="sticker twinkle" style="right:40px; bottom:40px; width:22px; animation-delay:.9s" viewBox="0 0 24 24" aria-hidden="true">
+    <path d="M12 0l2.6 8.2L23 12l-8.4 3.8L12 24l-2.6-8.2L1 12l8.4-3.8z" fill="#AFD3A2"/>
+  </svg>
+  <h2 class="head">Thanks for <span>scrolling</span> ♡</h2>
+  <p>That's the whole midterm run. If you got this far, you basically watched me learn the pen tool in real time. Comments, critiques, and "you should've used a different green" takes are all welcome.</p>
+  <div class="sign" contenteditable="true" spellcheck="false">[your email or IG here]</div>
+  <footer>
+    MULTIMEDIA SYSTEMS (CTMLSYSL)<br>
+    <span contenteditable="true" spellcheck="false">[SECTION] · [SCHEDULE]</span><br>
+    A.Y. 2026–2027
+  </footer>
+</section>
+
+</div><!-- /stack -->
+</div><!-- /wrap -->
+
+<!-- ============ MODAL ============ -->
+<div class="modal" id="modal" role="dialog" aria-modal="true" aria-labelledby="mTitle">
+  <div class="sheet" role="document">
+    <button class="close" id="close" aria-label="Close">✕</button>
+    <div class="sheet-grid">
+      <div>
+        <div class="shot" id="shot">
+          <img id="shotImg" alt="">
+          <div class="stackcol" id="shotPh">
+            <span class="ph">[UPLOAD IMAGE HERE]</span>
+            <button class="upload-btn" id="uploadBtn">Choose image</button>
+          </div>
+        </div>
+        <input type="file" accept="image/*" id="shotInput" hidden>
+        <span class="field-label">TOOLS USED</span>
+        <div class="chips" id="mChips"></div>
+      </div>
+      <div>
+        <div class="kicker" id="mKicker">OUTPUT 01</div>
+        <h3 id="mTitle">Title</h3>
+        <span class="field-label">WHAT THIS ACTIVITY WAS</span>
+        <div class="editable" id="mBrief" contenteditable="true" spellcheck="false"></div>
+        <span class="field-label">MY REFLECTION</span>
+        <div class="editable empty" id="mNote" contenteditable="true" spellcheck="false">[Add your description/reflection here]</div>
+      </div>
+    </div>
+    <div class="sheet-bar">
+      <button class="arrow" id="mPrev" aria-label="Previous output">‹</button>
+      <div class="pos" id="mPos">01 / 07</div>
+      <button class="arrow" id="mNext" aria-label="Next output">›</button>
+    </div>
+  </div>
+</div>
+
+<script>
+/* ================= DATA ================= */
+const OUTPUTS = [
+  { t:"Welcome to Multimedia Pubmat",
+    b:"The course welcome publication material — a pink-and-teal comic/pop-art poster introducing the subject. The exercise was about hierarchy: making the headline land first, the details second, and keeping the halftone texture from eating the text.",
+    tools:["Canva","Illustrator","Photoshop"] },
+  { t:"Cartoon Character Tracing (Patrick Star)",
+    b:"A vector tracing exercise recreating a cartoon character from reference, built entirely from primitive shapes. Practice for clean shape building, anchor point control, and steady line work.",
+    tools:["Illustrator","Pen tool","Shape builder"] },
+  { t:"Egg Tracing",
+    b:"A vector illustration focused on gradients, shading and soft form, using a fried egg as the subject. Deceptively hard — the yolk needed radial gradients layered over each other to stop looking like a flat orange circle.",
+    tools:["Illustrator","Gradient mesh"] },
+  { t:"The Rock Vector Portrait",
+    b:"A digital vector portrait built from geometric shapes, working on realistic shading, facial proportion, and light direction. The longest output of the set, and the one that finally made value grouping click.",
+    tools:["Illustrator","Photoshop","Pen tool"] },
+  { t:"MySQL Logo Redesign",
+    b:"A logo redesign and recreation exercise — studying the original brand's color, iconography, and type pairing, then rebuilding it with my own take while keeping it recognizable.",
+    tools:["Illustrator","MySQL","Type study"] },
+  { t:"My Own Logo",
+    b:"An original personal mark for my own brand identity: concept sketches, one chosen direction, then refinement into a scalable vector with a defined color story.",
+    tools:["Illustrator","Photoshop"] },
+  { t:"GIMP K-pop Artist Poster",
+    b:"A photo manipulation poster made in GIMP, focused on typography layering, background compositing, and color grading. Cutting the subject cleanly and matching the light between layers was the whole battle.",
+    tools:["GIMP","Photoshop","Color grading"] }
+];
+
+const REDUCE = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+const pad = n => String(n+1).padStart(2,"0");
+const images = new Array(OUTPUTS.length).fill(null);
+
+/* ================= DECK ================= */
+const deck = document.getElementById("deck");
+const dots = document.getElementById("dots");
+let index = 0;
+
+OUTPUTS.forEach((o,i)=>{
+  const c = document.createElement("article");
+  c.className = "card" + (i%2 ? " alt" : "");
+  c.dataset.i = i;
+  c.innerHTML = `
+    <div class="thumb">
+      <span class="num">${pad(i)}</span>
+      <img alt="" data-thumb="${i}" style="display:none">
+      <span class="ph">[UPLOAD<br>IMAGE HERE]</span>
+    </div>
+    <div class="cap">
+      <h3>${o.t}</h3>
+      <span class="view">VIEW →</span>
+    </div>`;
+  deck.appendChild(c);
+
+  const d = document.createElement("button");
+  d.type="button"; d.setAttribute("aria-label", "Go to output " + pad(i));
+  d.addEventListener("click", ()=>{ index=i; layout(); });
+  dots.appendChild(d);
+});
+
+const cards = [...deck.querySelectorAll(".card")];
+
+function layout(drag = 0){
+  cards.forEach((c,i)=>{
+    const off = i - index - drag;
+    const a = Math.abs(off);
+    const x = off * 122;
+    const rot = off * 7;
+    const scale = Math.max(0.62, 1 - a*0.14);
+    const tf = `translateX(${x}px) translateY(${a*16}px) rotate(${rot}deg) scale(${scale})`;
+    c.style.setProperty("--tf", tf);
+    c.style.transform = tf;
+    c.style.zIndex = 20 - Math.round(a*10);
+    c.style.opacity = a > 2.6 ? 0 : 1 - a*0.22;
+    c.style.pointerEvents = a > 2.6 ? "none" : "auto";
+    c.classList.toggle("center", Math.round(off) === 0);
+    c.setAttribute("aria-hidden", a > 2.6 ? "true" : "false");
+  });
+  [...dots.children].forEach((d,i)=> d.classList.toggle("on", i===index));
+}
+layout();
+
+const go = n => { index = Math.max(0, Math.min(OUTPUTS.length-1, n)); layout(); };
+document.getElementById("prev").onclick = ()=> go(index-1);
+document.getElementById("next").onclick = ()=> go(index+1);
+
+/* drag / swipe */
+let down=false, startX=0, moved=0;
+deck.addEventListener("pointerdown", e=>{
+  down=true; startX=e.clientX; moved=0;
+  deck.classList.add("dragging");
+  deck.setPointerCapture(e.pointerId);
+  cards.forEach(c=> c.style.transition = "none");
+});
+deck.addEventListener("pointermove", e=>{
+  if(!down) return;
+  moved = e.clientX - startX;
+  layout(-moved/210);
+});
+function release(){
+  if(!down) return;
+  down=false; deck.classList.remove("dragging");
+  cards.forEach(c=> c.style.transition = "");
+  if(Math.abs(moved) > 55) go(index + (moved < 0 ? 1 : -1));
+  else layout();
+}
+deck.addEventListener("pointerup", release);
+deck.addEventListener("pointercancel", release);
+deck.addEventListener("pointerleave", release);
+
+/* wheel: horizontal intent only */
+deck.addEventListener("wheel", e=>{
+  if(Math.abs(e.deltaX) > Math.abs(e.deltaY)){
+    e.preventDefault();
+    if(Math.abs(e.deltaX) > 18) throttleWheel(e.deltaX > 0 ? 1 : -1);
+  }
+}, {passive:false});
+let wheelLock = false;
+function throttleWheel(dir){
+  if(wheelLock) return;
+  wheelLock = true; go(index+dir);
+  setTimeout(()=> wheelLock=false, 320);
+}
+
+/* click a card */
+deck.addEventListener("click", e=>{
+  const card = e.target.closest(".card");
+  if(!card || Math.abs(moved) > 6) return;
+  const i = +card.dataset.i;
+  if(i === index) open(i); else go(i);
+});
+
+/* ================= MODAL ================= */
+const modal = document.getElementById("modal");
+const shot = document.getElementById("shot");
+const shotImg = document.getElementById("shotImg");
+const shotPh = document.getElementById("shotPh");
+const notes = new Array(OUTPUTS.length).fill("");
+let open_i = 0, lastFocus = null;
+
+function paint(i){
+  const o = OUTPUTS[i];
+  open_i = i;
+  document.getElementById("mKicker").textContent = "OUTPUT " + pad(i);
+  document.getElementById("mTitle").textContent = o.t;
+  document.getElementById("mBrief").textContent = o.b;
+  const note = document.getElementById("mNote");
+  note.textContent = notes[i] || "[Add your description/reflection here]";
+  note.classList.toggle("empty", !notes[i]);
+  document.getElementById("mPos").textContent = pad(i) + " / " + pad(OUTPUTS.length-1);
+  const chips = document.getElementById("mChips");
+  chips.innerHTML = "";
+  o.tools.forEach(t=>{ const s=document.createElement("span"); s.className="chip"; s.textContent=t; chips.appendChild(s); });
+  shot.classList.toggle("alt", i%2===1);
+  if(images[i]){ shotImg.src = images[i]; shotImg.style.display="block"; shotPh.style.display="none"; }
+  else { shotImg.removeAttribute("src"); shotImg.style.display="none"; shotPh.style.display="flex"; }
+  shotImg.alt = o.t;
+}
+function open(i){
+  lastFocus = document.activeElement;
+  paint(i); modal.classList.add("show");
+  document.body.style.overflow="hidden";
+  document.getElementById("close").focus();
+}
+function close(){
+  saveNote();
+  modal.classList.remove("show");
+  document.body.style.overflow="";
+  if(lastFocus) lastFocus.focus();
+}
+function saveNote(){
+  const note = document.getElementById("mNote");
+  const txt = note.textContent.trim();
+  notes[open_i] = (txt && txt !== "[Add your description/reflection here]") ? txt : "";
+}
+function step(d){ saveNote(); const n = (open_i + d + OUTPUTS.length) % OUTPUTS.length; index = n; layout(); paint(n); }
+
+document.getElementById("close").onclick = close;
+document.getElementById("mPrev").onclick = ()=> step(-1);
+document.getElementById("mNext").onclick = ()=> step(1);
+modal.addEventListener("click", e=>{ if(e.target === modal) close(); });
+
+document.getElementById("mNote").addEventListener("focus", e=>{
+  if(e.target.classList.contains("empty")){ e.target.textContent=""; e.target.classList.remove("empty"); }
+});
+document.getElementById("mNote").addEventListener("blur", e=>{
+  saveNote();
+  if(!e.target.textContent.trim()){ e.target.textContent="[Add your description/reflection here]"; e.target.classList.add("empty"); }
+});
+
+document.addEventListener("keydown", e=>{
+  if(modal.classList.contains("show")){
+    if(e.key === "Escape") close();
+    if(e.target.isContentEditable) return;
+    if(e.key === "ArrowLeft") step(-1);
+    if(e.key === "ArrowRight") step(1);
+  } else if(document.activeElement.closest && document.activeElement.closest("#portfolio")){
+    if(e.key === "ArrowLeft") go(index-1);
+    if(e.key === "ArrowRight") go(index+1);
+  }
+});
+
+/* ================= UPLOADS ================= */
+const shotInput = document.getElementById("shotInput");
+document.getElementById("uploadBtn").onclick = ()=> shotInput.click();
+shot.addEventListener("click", e=>{ if(e.target === shot || e.target.classList.contains("ph")) shotInput.click(); });
+shotInput.addEventListener("change", e=>{
+  const f = e.target.files[0]; if(!f) return;
+  const url = URL.createObjectURL(f);
+  images[open_i] = url;
+  paint(open_i);
+  const th = deck.querySelector(`[data-thumb="${open_i}"]`);
+  th.src = url; th.style.display = "block";
+  th.parentElement.querySelector(".ph").style.display = "none";
+  e.target.value = "";
+});
+
+const avatarInput = document.getElementById("avatarInput");
+document.getElementById("avatarBtn").onclick = ()=> avatarInput.click();
+avatarInput.addEventListener("change", e=>{
+  const f = e.target.files[0]; if(!f) return;
+  document.getElementById("avatarImg").src = URL.createObjectURL(f);
+  document.getElementById("avatarHole").classList.add("filled");
+});
+
+/* ================= NAV STATE ================= */
+const links = [...document.querySelectorAll(".nav a")];
+const sections = links.map(a=> document.querySelector(a.getAttribute("href")));
+const io = new IntersectionObserver(entries=>{
+  entries.forEach(en=>{
+    if(en.isIntersecting){
+      links.forEach(l=> l.classList.toggle("on", l.getAttribute("href") === "#" + en.target.id));
+    }
+  });
+}, {rootMargin:"-45% 0px -50% 0px"});
+sections.forEach(s=> s && io.observe(s));
+</script>
+</body>
+</html>
