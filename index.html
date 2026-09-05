@@ -622,12 +622,9 @@ footer{
   <h2 class="head">What I <span>built it with</span></h2>
   <p class="lede">Every output above came out of one of these. The switching between them was half the lesson.</p>
   <div class="tools-row">
-    <div class="tool"><i style="background:#5C8F5E">GI</i><span>GIMP<small>Photo manipulation, poster compositing</small></span></div>
-    <div class="tool"><i style="background:#EB90AB">Ai</i><span>Illustrator<small>Vector tracing, logo builds</small></span></div>
-    <div class="tool"><i style="background:#8CBE84">Ps</i><span>Photoshop<small>Retouching, color grading</small></span></div>
-    <div class="tool"><i style="background:#C9647F">Ca</i><span>Canva<small>Pubmat layout, quick type</small></span></div>
-    <div class="tool"><i style="background:#4C6B54">My</i><span>MySQL<small>Brand study for the redesign</small></span></div>
-    <div class="tool"><i style="background:#F5B6C9;color:#26402F">Cc</i><span>CapCut<small>Motion + short-form edits</small></span></div>
+    <div class="tool"><i style="background:#5C8F5E">Gi</i><span>GIMP<small>Photo manipulation, poster compositing</small></span></div>
+    <div class="tool"><i style="background:#EB90AB">Ic</i><span>Inkscape<small>Vector tracing, logo builds</small></span></div>
+    <div class="tool"><i style="background:#8CBE84">Ca</i><span>Canva<small>Pubmat layout, quick type</small></span></div>
   </div>
 </section>
 
@@ -782,9 +779,10 @@ deck.addEventListener("pointermove", e=>{
   moved = e.clientX - startX;
   layout(-moved/210);
 });
-function release(){
+function release(e){
   if(!down) return;
   down=false; deck.classList.remove("dragging");
+  if(e && deck.hasPointerCapture(e.pointerId)) deck.releasePointerCapture(e.pointerId);
   cards.forEach(c=> c.style.transition = "");
   if(Math.abs(moved) > 55) go(index + (moved < 0 ? 1 : -1));
   else layout();
