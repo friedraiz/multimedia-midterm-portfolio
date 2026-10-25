@@ -443,6 +443,7 @@ h2.head span{color:var(--rose-500)}
 }
 .card.alt .thumb{background:rgba(255,255,255,.58)}
 .card .thumb img{object-fit:contain; padding:5px; mix-blend-mode:multiply}
+.card .thumb video{position:absolute; inset:0; width:100%; height:100%; object-fit:cover; padding:0; background:#26402F}
 .card .num{
   top:10px; left:auto; right:10px; padding:4px 7px; border-radius:3px;
   color:var(--ink); background:var(--mint-200); font-size:10px;
@@ -538,6 +539,12 @@ h2.head span{color:var(--rose-500)}
 }
 .modal.show .sheet{transform:none; opacity:1}
 .sheet-grid{display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1fr); gap:22px}
+.sheet-grid .project-details{margin:12px 0 2px; padding:12px 14px; border:1px dashed var(--mint-500); border-radius:10px; background:rgba(223,239,213,.34)}
+.project-details p{margin:0; font-size:13px; line-height:1.5; color:var(--ink-soft)}
+.project-details strong{color:var(--ink)}
+.award-list{display:flex; flex-wrap:wrap; gap:6px; margin-top:8px}
+.award-badge{font:700 10.5px/1.2 var(--body); color:var(--ink); background:var(--rose-200); border:1px solid rgba(201,100,127,.3); border-radius:var(--r-pill); padding:6px 9px}
+.award-badge.champion{background:var(--mint-200); border-color:var(--mint-500)}
 @media (max-width:760px){ .sheet-grid{grid-template-columns:1fr} }
 
 .shot{
@@ -578,6 +585,9 @@ h2.head span{color:var(--rose-500)}
     #fffdf7;
 }
 .shot img{position:absolute; inset:0; width:100%; height:100%; object-fit:contain; background:var(--cream)}
+.shot video{position:absolute; inset:0; width:100%; height:100%; object-fit:contain; background:#26402F; z-index:3}
+.shot.video-shot{background:#26402F}
+.shot.video-shot::after{display:none}
 .shot .basket-frame{display:none}
 .shot.portrait-shot{
   min-height:390px; border:0; box-shadow:none; background:transparent;
@@ -789,7 +799,7 @@ footer{
 
       <div class="lockup">
         <h1><span class="word-port">Port</span><span class="word-folio">folio</span></h1>
-        <div class="tagline">MIDTERM COMPILATION <span aria-hidden="true">←</span></div>
+        <div class="tagline">COURSE PORTFOLIO <span aria-hidden="true">←</span></div>
       </div>
 
       <div class="hero-sub">
@@ -800,14 +810,14 @@ footer{
             <div class="tape"></div>
             <div class="reel"></div>
           </div>
-          <div class="cassette-label"><span>SIDE A</span><span>MIDTERMS</span></div>
+          <div class="cassette-label"><span>SIDE A</span><span>FULL COURSE</span></div>
         </div>
       </div>
 
       <div class="bio">
         <h2>Raiza Lhyn Antonio Gloria</h2>
         <div class="meta">BSIT — ITE305</div>
-        <p>This page is my midterm output compilation for Multimedia Systems, put together like a zine instead of a folder because staring at a grid of files felt wrong for a design class. Swipe through the deck below and you'll find every activity I worked on, in the order I made them, with a bit of honesty about how each one went. Some were fun, some fought back. Both taught me something.</p>
+        <p>This page is my complete output compilation for Multimedia Systems, put together like a zine instead of a folder because staring at a grid of files felt wrong for a design class. Swipe through the deck below and you'll find every activity and project I worked on, in the order I made them, with a bit of honesty about how each one went. Some were fun, some fought back. Both taught me something.</p>
       </div>
     </div>
   </div>
@@ -825,7 +835,7 @@ footer{
   <span class="eyebrow">ABOUT / THE DESIGN JOURNEY</span>
   <h2 class="head">How this <span>portfolio</span> came together</h2>
   <div class="info-pill">
-    This portfolio compiles every midterm activity from the course — starting with the welcome pubmat and ending with the final GIMP poster. Laid out in order, it reads like a progress bar: shapes first, then shading, then brand thinking, then full composites. What I'm proudest of isn't any single output, it's that the later files took me half the time and twice the confidence of the first ones.
+    This portfolio compiles my ITE305 outputs and projects — starting with the welcome pubmat and ending with two award-winning multimedia productions. Laid out in order, it reads like a progress bar: shapes first, then shading, then brand thinking, then full composites and storytelling. What I'm proudest of isn't any single output, it's how each project helped me build confidence.
   </div>
 
   <div class="timeline" role="list" aria-label="Activity order">
@@ -837,6 +847,8 @@ footer{
       <div class="tl-step" role="listitem"><div class="tl-dot">5</div><div class="tl-cap">MySQL Redesign</div></div>
       <div class="tl-step" role="listitem"><div class="tl-dot">6</div><div class="tl-cap">My Own Logo</div></div>
       <div class="tl-step" role="listitem"><div class="tl-dot">7</div><div class="tl-cap">GIMP Poster</div></div>
+      <div class="tl-step" role="listitem"><div class="tl-dot">8</div><div class="tl-cap">IT and CS Promotional Video</div></div>
+      <div class="tl-step" role="listitem"><div class="tl-dot">9</div><div class="tl-cap">Punyagi Short Film</div></div>
     </div>
   </div>
 </section>
@@ -855,9 +867,9 @@ footer{
     <g fill="#26402F"><rect x="4" y="4" width="1" height="2"/><rect x="8" y="4" width="1" height="2"/></g>
   </svg>
   <img class="sticker float slow section-scatter" style="right:22px; bottom:16px; width:55px" src="icons/plate.png" alt="" aria-hidden="true">
-  <span class="eyebrow">SPILL THE OUTPUTS</span>
+  <span class="eyebrow">OUTPUTS / PROJECTS</span>
   <h2 class="head">Drag the deck, <span>open a card</span></h2>
-  <p class="lede">Seven outputs, in the order they were made. Tap the card in front to read the full write-up.</p>
+  <p class="lede">Nine outputs and projects, in the order they were made. Tap the card in front to read the full write-up.</p>
 
   <div class="deck-wrap">
     <div class="deck" id="deck"></div>
@@ -875,12 +887,14 @@ footer{
   <img class="sticker float section-scatter" style="right:26px; top:18px; width:90px" src="icons/star.png" alt="" aria-hidden="true">
   <img class="sticker float rev section-scatter" style="right:20px; bottom:16px; width:60px" src="icons/band_aid.png" alt="" aria-hidden="true">
   <img class="sticker float slow section-scatter" style="left:20px; bottom:14px; width:48px" src="icons/green_star.png" alt="" aria-hidden="true">
-  <span class="eyebrow">TOOLS OF THE SEMESTER</span>
+  <span class="eyebrow">TOOLS OF THE COURSE</span>
   <h2 class="head">What I <span>built it with</span></h2>
   <div class="tools-row">
     <div class="tool"><i style="background:#5C8F5E">Gi</i><span>GIMP<small>Photo manipulation, poster compositing</small></span></div>
     <div class="tool"><i style="background:#EB90AB">Ic</i><span>Inkscape<small>Vector tracing, logo builds</small></span></div>
     <div class="tool"><i style="background:#8CBE84">Ca</i><span>Canva<small>Pubmat layout, quick type</small></span></div>
+    <div class="tool"><i style="background:#26402F">DR</i><span>DaVinci Resolve<small>Video editing, color, post-production</small></span></div>
+    <div class="tool"><i style="background:#C9647F">CD</i><span>CapCut Desktop<small>Video editing and finishing</small></span></div>
   </div>
 </section>
 
@@ -895,7 +909,7 @@ footer{
   <img class="sticker float section-scatter" style="left:22px; top:110px; width:85px" src="icons/cute_green_apple.png" alt="" aria-hidden="true">
   <img class="sticker float slow section-scatter" style="right:24px; top:130px; width:65px" src="icons/pink_green_buttons.png" alt="" aria-hidden="true">
   <h2 class="head">Thanks for <span>scrolling</span> ♡</h2>
-  <p>And that wraps up the whole midterm. Looking back at these outputs, it’s pretty much a record of me figuring things out as I went, especially with the Pen Tool. Comments, critiques, and even suggestions like “maybe a different green” are always welcome. See you in finals!</p>
+  <p>And that wraps up my Multimedia Systems course portfolio. Looking back at these outputs and projects, it’s pretty much a record of me figuring things out as I went, from the Pen Tool to video editing and post-production. Comments, critiques, and even suggestions like “maybe a different green” are always welcome.</p>
   <div class="sign">gloriara@students.nu-clark.edu.ph</div>
   <footer>
     MULTIMEDIA SYSTEMS (CTMLSYSL)<br>
@@ -916,6 +930,7 @@ footer{
         <div class="shot" id="shot">
           <img id="shotBasket" class="basket-frame" alt="" aria-hidden="true" src="icons/pink_basket.png">
           <img id="shotImg" alt="">
+          <video id="shotVideo" controls playsinline preload="metadata" aria-label="Project video"></video>
           <div class="stackcol" id="shotPh">
             <span class="ph"></span>
             <button class="upload-btn" id="uploadBtn">Choose image</button>
@@ -928,6 +943,7 @@ footer{
       <div>
         <div class="kicker" id="mKicker">OUTPUT 01</div>
         <h3 id="mTitle">Title</h3>
+        <div class="project-details" id="mDetails"></div>
         <span class="field-label">WHAT THIS ACTIVITY WAS</span>
         <div class="editable" id="mBrief"></div>
         <span class="field-label">MY REFLECTION</span>
@@ -936,7 +952,7 @@ footer{
     </div>
     <div class="sheet-bar">
       <button class="arrow" id="mPrev" aria-label="Previous output">‹</button>
-      <div class="pos" id="mPos">01 / 07</div>
+      <div class="pos" id="mPos">01 / 09</div>
       <button class="arrow" id="mNext" aria-label="Next output">›</button>
     </div>
   </div>
@@ -979,7 +995,25 @@ const OUTPUTS = [
   { t:"GIMP Poster",
     b:"A K-pop artist poster created in GIMP as an exercise in photo manipulation and composition. I worked on combining the background and subject, layering typography, and adjusting the colors to make everything feel like one cohesive design.",
     r:"This activity allowed me to explore photo manipulation and learn the basics of using GIMP. I did not put as much effort into the output because the main purpose was to explore the tools and features. Still, it helped me understand how images, colors, and text can work together in a poster.",
-    tools:["GIMP"], image:"outputs/output7.png" }
+    tools:["GIMP"], image:"outputs/output7.png" },
+
+  { t:"IT and CS Promotional Video",
+    b:"An award-winning ITE305 information technology and computer science in NU Clark promotional video that I directed and edited. I shaped the creative direction and storytelling, then led the editing, motion graphics, and visual effects to create a polished promotional piece for the Department Multimedia Showdown.",
+    r:"Role: Director and Editor. I contributed to the video's creative direction, storytelling, editing, motion graphics, and visual effects.",
+    tools:["DaVinci Resolve","CapCut Desktop","Motion Graphics","VFX"],
+    video:"outputs/ITE305_PromotionalVideo.mp4",
+    course:"ITE305", term:"1st Term", year:"2026–2027", event:"Department Multimedia Showdown",
+    awards:["Champion — Promotional Video Category","Best Concept and Pitch","Best Motion Graphics and VFX","Best On-Screen Presenter/Brand Ambassador"] },
+
+  { t:"Short Film — “Punyagi”",
+    b:"“Punyagi” is an award-winning short film created by ITE305. I edited the film alongside Kristine Mae Madronero, collaborating on the pacing, story flow, and post-production choices that strengthened its storytelling.",
+    r:"Role: Co-Editor, alongside Kristine Mae Madronero. Our collaborative editing and post-production work helped shape the film's storytelling and final presentation.",
+    tools:["DaVinci Resolve","CapCut Desktop","Co-Editing","Post-Production","Storytelling"],
+    image:"outputs/ITE305_ShortFilmPoster.png",
+    video:"outputs/ITE305_Shortfilm_web.mp4",
+    course:"ITE305", term:"1st Term", year:"2026–2027", event:"Department Multimedia Showdown",
+    posterCredit:"Lawrence Batac",
+    awards:["Champion — Short Film Category","Best Actress","Best Supporting Cast","Best Editing and Post-Production"] }
 
 ];
 
@@ -994,17 +1028,22 @@ let index = 0;
 
 OUTPUTS.forEach((o,i)=>{
   const c = document.createElement("article");
-  c.className = "card" + (i%2 ? " alt" : "") + ([0,6].includes(i) ? " portrait-card" : "") + (i === 5 ? " pocket-card" : "");
+  c.className = "card" + (i%2 ? " alt" : "") + ([0,6].includes(i) ? " portrait-card" : "") + (i === 5 ? " pocket-card" : "") + (o.video ? " project-card" : "");
   c.dataset.i = i;
+  const media = o.image
+    ? `<img alt="${o.t} poster" data-thumb="${i}" src="${o.image}">`
+    : o.video
+      ? `<video data-thumb="${i}" src="${o.video}" muted playsinline preload="metadata" aria-label="${o.t} preview"></video>`
+      : `<img alt="${o.t}" data-thumb="${i}" src="" style="display:none">`;
   c.innerHTML = `
     <div class="thumb">
       <span class="num">${pad(i)}</span>
       ${[0,6].includes(i) ? '<img class="basket-frame" alt="" aria-hidden="true" src="icons/pink_basket.png">' : ""}
       ${i === 5 ? '<img class="pocket-frame" alt="" aria-hidden="true" src="icons/pocket.png">' : ""}
-      <img alt="${o.t}" data-thumb="${i}" src="${o.image || ""}" style="display:${o.image ? "block" : "none"}">
+      ${media}
       ${i === 1 ? '<img class="card-sticker star-sticker" alt="" aria-hidden="true" src="icons/star.png">' : ""}
       ${i === 2 ? '<img class="card-sticker plate-sticker" alt="" aria-hidden="true" src="icons/plate.png">' : ""}
-      <span class="ph" style="display:${o.image ? "none" : "block"}">[UPLOAD<br>IMAGE HERE]</span>
+      <span class="ph" style="display:${o.image || o.video ? "none" : "block"}">[UPLOAD<br>IMAGE HERE]</span>
     </div>
     <div class="cap">
       <h3>${o.t}</h3>
@@ -1100,6 +1139,7 @@ deck.addEventListener("click", e=>{
 const modal = document.getElementById("modal");
 const shot = document.getElementById("shot");
 const shotImg = document.getElementById("shotImg");
+const shotVideo = document.getElementById("shotVideo");
 const shotPh = document.getElementById("shotPh");
 let open_i = 0, lastFocus = null;
 
@@ -1110,15 +1150,43 @@ function paint(i){
   document.getElementById("mTitle").textContent = o.t;
   document.getElementById("mBrief").textContent = o.b;
   document.getElementById("mNote").textContent = o.r || "[Add your description/reflection here]";
+  const details = document.getElementById("mDetails");
+  details.innerHTML = o.course ? `
+    <p><strong>Role:</strong> ${o.r.replace(/^Role:\s*/, "").split(".")[0]}<br>
+    <strong>Course:</strong> ${o.course} · <strong>Term:</strong> ${o.term} · <strong>Academic Year:</strong> ${o.year}<br>
+    <strong>Event:</strong> ${o.event}${o.posterCredit ? `<br><strong>Poster:</strong> Created by ${o.posterCredit}` : ""}</p>
+    <div class="award-list" aria-label="Awards">${o.awards.map((award, n) => `<span class="award-badge${n === 0 ? " champion" : ""}">${award}</span>`).join("")}</div>
+  ` : "";
+  details.style.display = o.course ? "block" : "none";
   document.getElementById("mPos").textContent = pad(i) + " / " + pad(OUTPUTS.length-1);
   const chips = document.getElementById("mChips");
   chips.innerHTML = "";
   o.tools.forEach(t=>{ const s=document.createElement("span"); s.className="chip"; s.textContent=t; chips.appendChild(s); });
   shot.classList.toggle("alt", i%2===1);
   shot.classList.toggle("portrait-shot", [0,6].includes(i));
-  if(images[i]){ shotImg.src = images[i]; shotImg.style.display="block"; shotPh.style.display="none"; }
-  else { shotImg.removeAttribute("src"); shotImg.style.display="none"; shotPh.style.display="flex"; }
+  shot.classList.toggle("video-shot", Boolean(o.video));
+  if(o.video){
+    shotVideo.src = o.video;
+    shotVideo.style.display = "block";
+    shotImg.style.display = "none";
+    shotPh.style.display = "none";
+  } else if(images[i]){
+    shotVideo.removeAttribute("src");
+    shotVideo.load();
+    shotVideo.style.display = "none";
+    shotImg.src = images[i];
+    shotImg.style.display="block";
+    shotPh.style.display="none";
+  } else {
+    shotVideo.removeAttribute("src");
+    shotVideo.load();
+    shotVideo.style.display = "none";
+    shotImg.removeAttribute("src");
+    shotImg.style.display="none";
+    shotPh.style.display="flex";
+  }
   shotImg.alt = o.t;
+  shotVideo.setAttribute("aria-label", o.t + " video");
 }
 function open(i){
   lastFocus = document.activeElement;
