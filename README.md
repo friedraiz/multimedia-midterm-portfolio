@@ -9,7 +9,7 @@ The portfolio presents the course outputs and projects in an interactive, scrapb
 ### IT and CS Promotional Video
 
 - **Role:** Director and Editor
-- **Course:** ITE305
+- **Block:** ITE305
 - **Term:** 1st Term
 - **Academic Year:** 2026–2027
 - **Event:** Department Multimedia Showdown
@@ -26,7 +26,7 @@ The project highlights creative direction, storytelling, editing, motion graphic
 
 - **Role:** Co-Editor, alongside Kristine Mae Madronero
 - **Poster:** Created by Lawrence Batac
-- **Course:** ITE305
+- **Block:** ITE305
 - **Term:** 1st Term
 - **Academic Year:** 2026–2027
 - **Event:** Department Multimedia Showdown
@@ -75,6 +75,17 @@ The website uses locally stored assets and does not require a JavaScript framewo
 ```
 
 `ITE305_Shortfilm_web.mp4` is the browser-compatible H.264 version used by the portfolio. The original `ITE305_Shortfilm.mp4` is preserved as the source video.
+
+## Vercel Deployment
+
+The MP4 files are tracked with Git LFS because they exceed GitHub's regular file-size limit. To deploy the videos correctly on Vercel:
+
+1. Open the Vercel project settings.
+2. Go to **Settings → Git**.
+3. Enable **Git LFS**.
+4. Trigger a new deployment.
+
+If Git LFS is disabled, the deployment may contain small LFS pointer files instead of the actual MP4 media, causing the browser video controls to appear without playable video frames.
 
 ## Running the Portfolio
 

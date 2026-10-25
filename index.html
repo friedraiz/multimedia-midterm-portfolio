@@ -816,7 +816,7 @@ footer{
 
       <div class="bio">
         <h2>Raiza Lhyn Antonio Gloria</h2>
-        <div class="meta">BSIT — ITE305</div>
+        <div class="meta">BSIT — Block ITE305</div>
         <p>This page is my complete output compilation for Multimedia Systems, put together like a zine instead of a folder because staring at a grid of files felt wrong for a design class. Swipe through the deck below and you'll find every activity and project I worked on, in the order I made them, with a bit of honesty about how each one went. Some were fun, some fought back. Both taught me something.</p>
       </div>
     </div>
@@ -1002,7 +1002,7 @@ const OUTPUTS = [
     r:"Role: Director and Editor. I contributed to the video's creative direction, storytelling, editing, motion graphics, and visual effects.",
     tools:["DaVinci Resolve","CapCut Desktop","Motion Graphics","VFX"],
     video:"outputs/ITE305_PromotionalVideo.mp4",
-    course:"ITE305", term:"1st Term", year:"2026–2027", event:"Department Multimedia Showdown",
+    block:"ITE305", term:"1st Term", year:"2026–2027", event:"Department Multimedia Showdown",
     awards:["Champion — Promotional Video Category","Best Concept and Pitch","Best Motion Graphics and VFX","Best On-Screen Presenter/Brand Ambassador"] },
 
   { t:"Short Film — “Punyagi”",
@@ -1011,7 +1011,7 @@ const OUTPUTS = [
     tools:["DaVinci Resolve","CapCut Desktop","Co-Editing","Post-Production","Storytelling"],
     image:"outputs/ITE305_ShortFilmPoster.png",
     video:"outputs/ITE305_Shortfilm_web.mp4",
-    course:"ITE305", term:"1st Term", year:"2026–2027", event:"Department Multimedia Showdown",
+    block:"ITE305", term:"1st Term", year:"2026–2027", event:"Department Multimedia Showdown",
     posterCredit:"Lawrence Batac",
     awards:["Champion — Short Film Category","Best Actress","Best Supporting Cast","Best Editing and Post-Production"] }
 
@@ -1151,13 +1151,13 @@ function paint(i){
   document.getElementById("mBrief").textContent = o.b;
   document.getElementById("mNote").textContent = o.r || "[Add your description/reflection here]";
   const details = document.getElementById("mDetails");
-  details.innerHTML = o.course ? `
+  details.innerHTML = o.block ? `
     <p><strong>Role:</strong> ${o.r.replace(/^Role:\s*/, "").split(".")[0]}<br>
-    <strong>Course:</strong> ${o.course} · <strong>Term:</strong> ${o.term} · <strong>Academic Year:</strong> ${o.year}<br>
+    <strong>Block:</strong> ${o.block} · <strong>Term:</strong> ${o.term} · <strong>Academic Year:</strong> ${o.year}<br>
     <strong>Event:</strong> ${o.event}${o.posterCredit ? `<br><strong>Poster:</strong> Created by ${o.posterCredit}` : ""}</p>
     <div class="award-list" aria-label="Awards">${o.awards.map((award, n) => `<span class="award-badge${n === 0 ? " champion" : ""}">${award}</span>`).join("")}</div>
   ` : "";
-  details.style.display = o.course ? "block" : "none";
+  details.style.display = o.block ? "block" : "none";
   document.getElementById("mPos").textContent = pad(i) + " / " + pad(OUTPUTS.length-1);
   const chips = document.getElementById("mChips");
   chips.innerHTML = "";
